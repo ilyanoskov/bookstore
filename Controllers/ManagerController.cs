@@ -13,7 +13,9 @@ namespace Bookstore1.Controllers
 {
     public class ManagerController : Controller
     {
+        private readonly ApplicationDbContext _context;
 
+        public ManagerController(ApplicationDbContext context) { _context = context; }
         // GET: Manager
         [Authorize(Roles = "Manager")]
         public async Task<IActionResult> Index()
@@ -21,6 +23,10 @@ namespace Bookstore1.Controllers
             return View();
         }
 
-      
+        //public async Task<IActionResult> DisplayUsers()
+        //{
+        //    return View(await _context.Users.ToListAsync());
+        //}
+
     }
 }

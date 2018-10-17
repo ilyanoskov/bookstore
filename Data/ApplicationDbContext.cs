@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Bookstore.Models;
+using Bookstore1.Models;
 
 namespace Bookstore1.Data
 {
