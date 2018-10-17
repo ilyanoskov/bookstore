@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Bookstore.Models.Book>
+@{
+    ViewData["Title"] = "Home Page";
+}
+<div>
+    <div class="jumbotron">
+        <h1>Bookstore</h1>
+    </div>
+    <div class="books">
+        @foreach (var item in Model)
+        {
+            <a class="book" href="/books/details/@item.id">
+                <img src="https://picsum.photos/150" />
+                <h4>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </h4>
+                <div>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </div>
+                <div>
+                    @Html.DisplayFor(modelItem => item.Author)
+                </div>
+                <div>
+                    @Html.DisplayFor(modelItem => item.Pulication_year)
+                </div>
+                <div>
+                    @Html.DisplayFor(modelItem => item.Publisher)
+                </div>
+                <div>
+                    @Html.DisplayFor(modelItem => item.Pages)
+                </div>
+                <div>
+                    @Html.DisplayFor(modelItem => item.Resume)
+                </div>
+                <div>
+                    @Html.DisplayFor(modelItem => item.Category)
+                </div>
+            </a>
+        }
+    </div>
+</div>
