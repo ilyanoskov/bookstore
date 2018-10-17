@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Bookstore.Models;
 using Bookstore1.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Bookstore1.Controllers
 {
@@ -14,6 +15,7 @@ namespace Bookstore1.Controllers
     {
 
         // GET: Manager
+        [Authorize(Roles = "Manager")]
         public async Task<IActionResult> Index()
         {
             return View();
