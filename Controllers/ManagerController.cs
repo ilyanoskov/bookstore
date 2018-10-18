@@ -23,10 +23,46 @@ namespace Bookstore1.Controllers
             return View();
         }
 
-        //public async Task<IActionResult> DisplayUsers()
-        //{
-        //    return View(await _context.Users.ToListAsync());
-        //}
+        [Authorize(Roles = "Manager")]
+        public async Task<IActionResult> DisplayUsers()
+        {
+            var allusers = await _context.Users.ToListAsync();
+            var users = allusers.Where(x => x.Email != "stefan@email.com");
+            return View(users);
+        }
+
+        [Authorize(Roles = "Manager")]
+        public async Task<IActionResult> Delete(string id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var user = await _context.Users
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return View(user);
+        }
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Manager")]
+        public async Task<IActionResult> DeleteConfirmed(string id)
+        {
+            var user = await _context.Users.FindAsync(id);
+            _context.Users.Remove(user);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        private bool UserExists(string id)
+        {
+            return _context.Users.Any(e => e.Id == id);
+        }
 
     }
 }
