@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Bookstore.Models;
 using Bookstore1.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Bookstore1.Controllers
 {
@@ -44,6 +45,7 @@ namespace Bookstore1.Controllers
         }
 
         // GET: Categories/Create
+        [Authorize(Roles = "Manager")]
         public IActionResult Create()
         {
             return View();
@@ -54,6 +56,7 @@ namespace Bookstore1.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Manager")]
         public async Task<IActionResult> Create([Bind("id,genre")] Category category)
         {
             if (ModelState.IsValid)
@@ -66,6 +69,7 @@ namespace Bookstore1.Controllers
         }
 
         // GET: Categories/Edit/5
+        [Authorize(Roles = "Manager")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -86,6 +90,7 @@ namespace Bookstore1.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Manager")]
         public async Task<IActionResult> Edit(int id, [Bind("id,genre")] Category category)
         {
             if (id != category.id)
@@ -117,6 +122,7 @@ namespace Bookstore1.Controllers
         }
 
         // GET: Categories/Delete/5
+        [Authorize(Roles = "Manager")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -137,6 +143,7 @@ namespace Bookstore1.Controllers
         // POST: Categories/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Manager")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var category = await _context.Category.FindAsync(id);
