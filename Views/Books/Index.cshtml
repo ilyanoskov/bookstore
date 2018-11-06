@@ -1,4 +1,4 @@
-@model IEnumerable<Bookstore.Models.Book>
+@model IEnume>
 
 @{
     ViewData["Title"] = "Index";
@@ -14,6 +14,9 @@
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BookCategories)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Price)
@@ -36,12 +39,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.Type)
             </th>
-            @*
-                        <th>
-            @Html.DisplayNameFor(model => model.Category)
-        </th>
-            *@
-
             <th>
                 @Html.DisplayNameFor(model => model.Stock)
             </th>
@@ -53,6 +50,9 @@
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.ListBox("BookId", new SelectList(item.BookCategories, "BookId", "Category"))
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Price)
@@ -75,13 +75,6 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Type)
             </td>
-            @*
-
-                        <td>
-            @Html.DisplayFor(modelItem => item.Category)
-        </td>
-            *@
-
             <td>
                 @Html.DisplayFor(modelItem => item.Stock)
             </td>

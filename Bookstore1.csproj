@@ -15,4 +15,7 @@
     <Content Remove="Views\Manager\Create.cshtml" />
     <Content Remove="Views\Manager\Edit.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="VIewModels\" />
+  </ItemGroup>
 </Project>

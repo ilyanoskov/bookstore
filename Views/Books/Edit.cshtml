@@ -1,4 +1,4 @@
-@model Bookstore.Models.Book
+@model Bookstore.ViewModels.BookViewModel
 
 @{
     ViewData["Title"] = "Edit";
@@ -17,6 +17,11 @@
                 <label asp-for="Title" class="control-label"></label>
                 <input asp-for="Title" class="form-control" />
                 <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BookCategories" class="control-label"></label>
+                <input asp-for="BookCategories" class="form-control" />
+                <span asp-validation-for="BookCategories" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Price" class="control-label"></label>
@@ -53,15 +58,6 @@
                 <input asp-for="Type" class="form-control" />
                 <span asp-validation-for="Type" class="text-danger"></span>
             </div>
-            @*
-                        <div class="form-group">
-            <label asp-for="Category" class="control-label"></label>
-            <input asp-for="Category" class="form-control" />
-            <span asp-validation-for="Category" class="text-danger"></span>
-        </div>
-
-            *@
-
             <div class="form-group">
                 <label asp-for="Stock" class="control-label"></label>
                 <input asp-for="Stock" class="form-control" />
