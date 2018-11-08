@@ -27,6 +27,8 @@ namespace Bookstore1.Data.Migrations
 
                     b.Property<string>("Author");
 
+                    b.Property<string>("Category");
+
                     b.Property<int>("Pages");
 
                     b.Property<double>("Price");
@@ -46,19 +48,6 @@ namespace Bookstore1.Data.Migrations
                     b.HasKey("id");
 
                     b.ToTable("Book");
-                });
-
-            modelBuilder.Entity("Bookstore.Models.BookCategory", b =>
-                {
-                    b.Property<int>("BookId");
-
-                    b.Property<int>("CategoryId");
-
-                    b.HasKey("BookId", "CategoryId");
-
-                    b.HasIndex("CategoryId");
-
-                    b.ToTable("BookCategory");
                 });
 
             modelBuilder.Entity("Bookstore.Models.Category", b =>
@@ -204,9 +193,11 @@ namespace Bookstore1.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.Property<string>("LoginProvider");
+                    b.Property<string>("LoginProvider")
+                        .HasMaxLength(128);
 
-                    b.Property<string>("ProviderKey");
+                    b.Property<string>("ProviderKey")
+                        .HasMaxLength(128);
 
                     b.Property<string>("ProviderDisplayName");
 
@@ -237,28 +228,17 @@ namespace Bookstore1.Data.Migrations
                 {
                     b.Property<string>("UserId");
 
-                    b.Property<string>("LoginProvider");
+                    b.Property<string>("LoginProvider")
+                        .HasMaxLength(128);
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .HasMaxLength(128);
 
                     b.Property<string>("Value");
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
-                });
-
-            modelBuilder.Entity("Bookstore.Models.BookCategory", b =>
-                {
-                    b.HasOne("Bookstore.Models.Book", "Book")
-                        .WithMany("BookCategories")
-                        .HasForeignKey("BookId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Bookstore.Models.Category", "Category")
-                        .WithMany("BookCategories")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

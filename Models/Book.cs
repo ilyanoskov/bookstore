@@ -16,7 +16,7 @@ namespace Bookstore.Models
         public int Pages { get; set; }
         public string Resume { get; set; }
         public string Type { get; set; }
-        public ICollection<BookCategory> BookCategories { get; set; }
+        public string Category { get; set; }
         public int Stock { get; set; }
     }
 }

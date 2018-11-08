@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Bookstore.Models;
 using Bookstore1.Data;
-using Microsoft.AspNetCore.Authorization;
 
 namespace Bookstore1.Controllers
 {
@@ -45,7 +44,6 @@ namespace Bookstore1.Controllers
         }
 
         // GET: Books/Create
-        [Authorize(Roles = "Manager")]
         public IActionResult Create()
         {
             return View();
@@ -56,7 +54,6 @@ namespace Bookstore1.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Manager")]
         public async Task<IActionResult> Create([Bind("id,Title,Price,Author,Pulication_year,Publisher,Pages,Resume,Type,Category,Stock")] Book book)
         {
             if (ModelState.IsValid)
@@ -69,7 +66,6 @@ namespace Bookstore1.Controllers
         }
 
         // GET: Books/Edit/5
-        [Authorize(Roles = "Manager")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -90,7 +86,6 @@ namespace Bookstore1.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Manager")]
         public async Task<IActionResult> Edit(int id, [Bind("id,Title,Price,Author,Pulication_year,Publisher,Pages,Resume,Type,Category,Stock")] Book book)
         {
             if (id != book.id)
@@ -122,7 +117,6 @@ namespace Bookstore1.Controllers
         }
 
         // GET: Books/Delete/5
-        [Authorize(Roles = "Manager")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -143,7 +137,6 @@ namespace Bookstore1.Controllers
         // POST: Books/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Manager")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var book = await _context.Book.FindAsync(id);
