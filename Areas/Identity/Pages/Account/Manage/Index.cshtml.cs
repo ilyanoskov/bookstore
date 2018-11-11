@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Bookstore1.Areas.Identity.Pages.Account.Manage
+namespace Bookstore.Areas.Identity.Pages.Account.Manage
 {
     public partial class IndexModel : PageModel
     {

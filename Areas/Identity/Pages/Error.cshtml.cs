@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 
-namespace Bookstore1.Areas.Identity.Pages
+namespace Bookstore.Areas.Identity.Pages
 {
     [AllowAnonymous]
     public class ErrorModel : PageModel

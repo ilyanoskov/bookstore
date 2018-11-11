@@ -1,15 +1,14 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Bookstore.Data;
 using Bookstore.Models;
-using Bookstore1.Data;
-using Microsoft.AspNetCore.Authorization;
 
-namespace Bookstore1.Controllers
+namespace Bookstore.Controllers
 {
     public class BooksController : Controller
     {
@@ -23,7 +22,8 @@ namespace Bookstore1.Controllers
         // GET: Books
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Book.ToListAsync());
+            var applicationDbContext = _context.Book.Include(b => b.Category);
+            return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Books/Details/5
@@ -35,6 +35,7 @@ namespace Bookstore1.Controllers
             }
 
             var book = await _context.Book
+                .Include(b => b.Category)
                 .FirstOrDefaultAsync(m => m.id == id);
             if (book == null)
             {
@@ -45,9 +46,9 @@ namespace Bookstore1.Controllers
         }
 
         // GET: Books/Create
-        [Authorize(Roles = "Manager")]
         public IActionResult Create()
         {
+            ViewData["CategoryId"] = new SelectList(_context.Category, "id", "id");
             return View();
         }
 
@@ -56,8 +57,7 @@ namespace Bookstore1.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Manager")]
-        public async Task<IActionResult> Create([Bind("id,Title,Price,Author,Pulication_year,Publisher,Pages,Resume,Type,Category,Stock")] Book book)
+        public async Task<IActionResult> Create([Bind("id,Title,Price,Author,Pulication_year,Publisher,Pages,Resume,Type,Stock,CategoryId")] Book book)
         {
             if (ModelState.IsValid)
             {
@@ -65,11 +65,11 @@ namespace Bookstore1.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["CategoryId"] = new SelectList(_context.Category, "id", "id", book.CategoryId);
             return View(book);
         }
 
         // GET: Books/Edit/5
-        [Authorize(Roles = "Manager")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -82,6 +82,7 @@ namespace Bookstore1.Controllers
             {
                 return NotFound();
             }
+            ViewData["CategoryId"] = new SelectList(_context.Category, "id", "id", book.CategoryId);
             return View(book);
         }
 
@@ -90,8 +91,7 @@ namespace Bookstore1.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Manager")]
-        public async Task<IActionResult> Edit(int id, [Bind("id,Title,Price,Author,Pulication_year,Publisher,Pages,Resume,Type,Category,Stock")] Book book)
+        public async Task<IActionResult> Edit(int id, [Bind("id,Title,Price,Author,Pulication_year,Publisher,Pages,Resume,Type,Stock,CategoryId")] Book book)
         {
             if (id != book.id)
             {
@@ -118,11 +118,11 @@ namespace Bookstore1.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["CategoryId"] = new SelectList(_context.Category, "id", "id", book.CategoryId);
             return View(book);
         }
 
         // GET: Books/Delete/5
-        [Authorize(Roles = "Manager")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -131,6 +131,7 @@ namespace Bookstore1.Controllers
             }
 
             var book = await _context.Book
+                .Include(b => b.Category)
                 .FirstOrDefaultAsync(m => m.id == id);
             if (book == null)
             {
@@ -143,7 +144,6 @@ namespace Bookstore1.Controllers
         // POST: Books/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Manager")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var book = await _context.Book.FindAsync(id);

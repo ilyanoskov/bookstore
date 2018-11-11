@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Bookstore1.Data.Migrations
+namespace Bookstore.Data.Migrations
 {
     public partial class BookCategory : Migration
     {

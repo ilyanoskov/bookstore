@@ -1,5 +1,5 @@
 ﻿using System;
-using Bookstore1.Data;
+using Bookstore.Data;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
@@ -7,8 +7,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-[assembly: HostingStartup(typeof(Bookstore1.Areas.Identity.IdentityHostingStartup))]
-namespace Bookstore1.Areas.Identity
+[assembly: HostingStartup(typeof(Bookstore.Areas.Identity.IdentityHostingStartup))]
+namespace Bookstore.Areas.Identity
 {
     public class IdentityHostingStartup : IHostingStartup
     {

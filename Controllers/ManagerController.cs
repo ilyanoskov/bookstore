@@ -6,10 +6,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Bookstore.Models;
-using Bookstore1.Data;
+using Bookstore.Data;
 using Microsoft.AspNetCore.Authorization;
 
-namespace Bookstore1.Controllers
+namespace Bookstore.Controllers
 {
     public class ManagerController : Controller
     {

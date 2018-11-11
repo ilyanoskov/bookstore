@@ -2,7 +2,7 @@
 
 namespace Bookstore.Data.Migrations
 {
-    public partial class Customer_dbo : Migration
+    public partial class BookCategoryManyToOne2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

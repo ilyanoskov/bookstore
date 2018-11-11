@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Bookstore1.Data;
+using Bookstore.Data;
 using System.Diagnostics;
-using Bookstore1.Models;
+using Bookstore.Models;
 
-namespace Bookstore1.Controllers
+namespace Bookstore.Controllers
 {
     public class HomeController : Controller
     {

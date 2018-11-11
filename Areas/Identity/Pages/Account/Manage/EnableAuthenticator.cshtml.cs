@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 
-namespace Bookstore1.Areas.Identity.Pages.Account.Manage
+namespace Bookstore.Areas.Identity.Pages.Account.Manage
 {
     public class EnableAuthenticatorModel : PageModel
     {
@@ -148,7 +148,7 @@ namespace Bookstore1.Areas.Identity.Pages.Account.Manage
         {
             return string.Format(
                 AuthenticatorUriFormat,
-                _urlEncoder.Encode("Bookstore1"),
+                _urlEncoder.Encode("Bookstore"),
                 _urlEncoder.Encode(email),
                 unformattedKey);
         }

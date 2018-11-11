@@ -4,14 +4,16 @@ using Bookstore.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Bookstore.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20181111165313_BookCategoryOneToMany")]
+    partial class BookCategoryOneToMany
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -26,8 +28,6 @@ namespace Bookstore.Data.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Author");
-
-                    b.Property<int>("CategoryId");
 
                     b.Property<int>("Pages");
 
@@ -47,9 +47,26 @@ namespace Bookstore.Data.Migrations
 
                     b.HasKey("id");
 
+                    b.ToTable("Book");
+                });
+
+            modelBuilder.Entity("Bookstore.Models.BookCategory", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("BookId");
+
+                    b.Property<int>("CategoryId");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("BookId");
+
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Book");
+                    b.ToTable("BookCategory");
                 });
 
             modelBuilder.Entity("Bookstore.Models.Category", b =>
@@ -239,10 +256,15 @@ namespace Bookstore.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("Bookstore.Models.Book", b =>
+            modelBuilder.Entity("Bookstore.Models.BookCategory", b =>
                 {
+                    b.HasOne("Bookstore.Models.Book", "Book")
+                        .WithMany("BookCategories")
+                        .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.HasOne("Bookstore.Models.Category", "Category")
-                        .WithMany("Books")
+                        .WithMany("BookCategories")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

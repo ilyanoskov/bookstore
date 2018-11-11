@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Bookstore.Models;
 using Microsoft.AspNetCore.Authorization;
 
-namespace Bookstore1.Models
+namespace Bookstore.Models
 {
     [Authorize(Roles = "Member")]
     public class Customer : IdentityUser
