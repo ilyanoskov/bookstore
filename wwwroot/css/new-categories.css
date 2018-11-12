@@ -1,0 +1,40 @@
+div.hello {   
+    height: 1500px;    
+    width: 380px;
+    border-right: 1px solid #D1D0CE;
+    border-top: 1px solid #D1D0CE;
+}
+
+div.sort1 ul {
+    list-style-type: none;
+    font-size: 15px;
+    font-weight: 900;
+    margin-top: 1px;    
+}
+
+div.sort1 ul li {
+ padding: 5px; 
+ font-weight: 900;
+}
+
+label.name1 {
+    font-size: 18px;
+    text-transform: uppercase;   
+}
+
+div.sort1 ul li a {
+  text-decoration: none;
+  color: black;
+}
+
+div.sort1 ul li a:hover {
+    text-decoration: none;
+    color:  #FCB326;
+    cursor: pointer;
+}
+
+h2.filt {
+    text-align: center;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}

@@ -1,0 +1,235 @@
+﻿@*@model IEnumerable<Bookstore.Models.Book>*@
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@model PagedList.Core.IPagedList<Bookstore.Models.Book>
+
+<style>
+    div.container input {
+        display: grid;
+        padding: 5px;
+        font-weight: 900;
+        margin-left: 20px;
+        margin-right: 15px;
+    }
+
+    div.one > input:nth-child(1) {
+        display: none;
+    }
+
+    div .container {
+        list-style-type: none;
+        font-size: 18px;
+        font-weight: 900;
+        margin-top: 1px;
+    }
+
+        div.container label {
+            list-style-type: none;
+            font-size: 16px;
+            font-weight: 900;
+            margin-top: 1px;
+            display: flex;
+            padding: 5px;
+            transition: none;
+            transition-delay: 0s;
+        }
+
+            div.container label:hover {
+                color: #FCB326;
+            }
+
+    div.holder {
+        width: 600px;
+        overflow: hidden;
+        position: relative;
+        display: flex;
+    }
+
+    div.holder1, div.holder2 {
+        width: 1150px;
+        padding-top: 10px;
+        overflow: hidden;
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        align-content: flex-start;
+    }
+
+    div.hold-book img {
+        height: 300px;
+        transition: transform .8s ease-in-out;
+        box-shadow: 5px 8px #888888;
+    }
+
+    div.hold-book {
+        width: 250px;
+        margin-left: 30px;
+        margin-top: 50px;
+        text-align: center;
+    }
+
+        div.hold-book h4 {
+            font-style: italic;
+        }
+
+        div.hold-book a.book p {
+            font-size: 18px;
+            font-weight: 900;
+            color: #FCB326;
+        }
+
+        div.hold-book a.book h4, h3 {
+            color: black;
+        }
+
+        div.hold-book a.book:visited {
+            color: black;
+        }
+
+        div.hold-book a.book {
+            text-decoration: none;
+            color: black;
+        }
+
+        div.hold-book img:hover {
+            cursor: pointer;
+            transform: translate3d(0px, -5px, 0px);
+        }
+</style>
+
+<!-- Image -->
+
+<div class="new">
+</div>
+
+<!-- Image -->
+
+
+<div class="books">
+    <!-- One Giant Div -->
+
+
+
+    <div class="hello">
+
+        <h2 class="filt">Categories</h2>
+        <div class="one">
+            <input type="checkbox" id="box1" name="accordion" />
+            <label for="box1" class="name1">Genres</label>
+            <div class="container">
+                <label><a href="/?CategoryId=6">Poetry</a></label>               
+                <label><a href="/?CategoryId=7">Modern &amp; contemporary fiction (post c 1945)</a></label>
+                <label><a href="/?CategoryId=8">TV / celebrity chef cookbooks</a></label>
+                <label><a href="/?CategoryId=9">Thriller / suspense</a></label>
+                <label><a href="/?CategoryId=10">Science fiction</a></label>
+                <label><a href="/?CategoryId=12">Historical fiction</a></label>
+                <label><a href="/?CategoryId=13">Classic fiction (pre c 1945)</a></label>
+                <label><a href="/?CategoryId=14">Fantasy</a></label>
+                <label><a href="/?CategoryId=15">Crime &amp; mystery</a></label>
+                <label><a href="/?CategoryId=16">Travel &amp; holiday guides</a></label>
+            </div>
+
+        </div>
+        <div class="two">
+            <input type="checkbox" id="box2" name="accordion" />
+            <label for="box2" class="name1">Publisher</label>
+            <div class="container">
+                <label><input type="checkbox" name="test" value="1" />Wordsworth Editions Ltd</label>
+                <label><input type="checkbox" name="test" value="2" />Penguin Books Ltd</label>
+                <label><input type="checkbox" name="test" value="3" />Pan Macmillan</label>
+                <label><input type="checkbox" name="test" value="4" />Bloomsbury Publishing PLC</label>
+                <label><input type="checkbox" name="test" value="5" />HarperCollins Publishers</label>
+                <label><input type="checkbox" name="test" value="6" />Hermes</label>
+                <label><input type="checkbox" name="test" value="7" />Cornerstone</label>
+                <label><input type="checkbox" name="test" value="8" />National Geographic Society</label>
+                <label><input type="checkbox" name="test" value="9" />Orion Publishing Co</label>
+                <label><input type="checkbox" name="test" value="10" />Vintage Publishing</label>
+            </div>
+        </div>
+
+        <div class="three">
+            <input type="checkbox" id="box3" name="accordion" />
+            <label for="box3" class="name1">Author</label>
+            <div class="container">
+                <label><input type="checkbox" name="test" value="1" />Oscar Wilde</label>
+                <label><input type="checkbox" name="test" value="2" />J. K. Rowling</label>
+                <label><input type="checkbox" name="test" value="3" />F. Scott Fitzgerald</label>
+                <label><input type="checkbox" name="test" value="4" />Jamie Oliver</label>
+                <label><input type="checkbox" name="test" value="5" />C. S. Lewis</label>
+                <label><input type="checkbox" name="test" value="6" />Stephen King</label>
+                <label><input type="checkbox" name="test" value="7" />P. L. Travers</label>
+                <label><input type="checkbox" name="test" value="8" />William Shakespeare</label>
+                <label><input type="checkbox" name="test" value="9" />Agatha Christie</label>
+                <label><input type="checkbox" name="test" value="10" />Elizabeth Gaskell</label>
+            </div>
+        </div>
+
+        <div class="four">
+            <input type="checkbox" id="box4" name="accordion" />
+            <label for="box4" class="name1">Price</label>
+            <div class="container">
+                <label><input type="checkbox" name="test" value="1" />Under &pound; 10</label>
+                <label><input type="checkbox" name="test" value="2" />&pound; 10 to &pound; 20</label>
+                <label><input type="checkbox" name="test" value="3" />Over &pound; 20</label>
+            </div>
+        </div>
+
+        <div class="five">
+            <input type="checkbox" id="box5" name="accordion" />
+            <label for="box5" class="name1">Language</label>
+            <div class="container">
+                <label><input type="checkbox" name="test" value="1" />English</label>
+                <label><input type="checkbox" name="test" value="2" />Bulgarian</label>
+                <label><input type="checkbox" name="test" value="3" />French</label>
+            </div>
+        </div>
+
+
+    </div>
+
+    <!-- Filters -->
+    <!-- Books -->
+
+    <div class="holder2">
+
+        @if (Model.Count() == 0)
+        {
+            <div>
+
+                <h1>The category does not exist!</h1>
+            </div>
+        }
+
+
+        @foreach (var item in Model)
+        {
+            <div class="hold-book">
+                <a class="book" href="/books/details/@item.id">
+                    <br />
+                    <img src="~/images/jamie-italy.jpg" />
+                    <p>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </p>
+                    <h4>
+                        @Html.DisplayFor(modelItem => item.Author)
+                    </h4>
+                    <h3>
+                        &pound;
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </h3>
+                </a>
+            </div>
+        }
+    </div>
+</div><!-- One Giant Div -->
+
+
+<div class="pagination">
+    <p style="color:blue;">
+        <pager list="@Model" aps-controller="Home" aps-action="Index"></pager>
+    </p>
+</div>
