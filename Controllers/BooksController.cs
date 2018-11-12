@@ -57,7 +57,7 @@ namespace Bookstore.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,Title,Price,Author,Pulication_year,Publisher,Pages,Resume,Type,Stock,CategoryId")] Book book)
+        public async Task<IActionResult> Create([Bind("id,Title,Price,Author,PublicationYear,Publisher,Pages,Resume,CoverType,Stock,CategoryId")] Book book)
         {
             if (ModelState.IsValid)
             {
@@ -91,7 +91,7 @@ namespace Bookstore.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,Title,Price,Author,Pulication_year,Publisher,Pages,Resume,Type,Stock,CategoryId")] Book book)
+        public async Task<IActionResult> Edit(int id, [Bind("id,Title,Price,Author,PublicationYear,Publisher,Pages,Resume,CoverType,Stock,CategoryId")] Book book)
         {
             if (id != book.id)
             {

@@ -1,0 +1,207 @@
+body {
+    margin: 0;
+    font-family: 'Cabin Sketch', sans-serif;
+    text-decoration: none;
+}
+
+nav {
+    color: white;
+    position: relative;
+    height: 5.5em;
+    width: 100%;
+    background: black;
+    box-sizing: border-box;
+    padding: 35px 18px;
+    display: flex;
+    list-style-type: none;
+    font-family: 'Cabin Sketch', sans-serif;
+    text-decoration: none;
+}
+
+ a.kk {    
+    cursor: pointer;     
+    position: relative;      
+    left: 160px;
+    margin-top: 15px;
+    padding-bottom: 20px;    
+    padding-right: 80px;    
+    font-weight: 600;
+    letter-spacing: .085em;
+    font-size: 15px;    
+    text-transform: uppercase;
+    font-family: 'Cabin Sketch', sans-serif;    
+    color:white;
+    text-decoration:none;
+}
+
+a.k1 {
+    cursor: pointer;
+    position: relative;
+    top: -10px;
+    left: 100px;
+    margin-top: 15px;
+    padding-bottom: 20px;
+    padding-right: 80px;
+    font-weight: 600;
+    letter-spacing: .085em;
+    font-size: 30px;
+    text-transform: uppercase;
+    font-family: 'Cabin Sketch', sans-serif;
+    color: white;
+    text-decoration: none;
+}
+
+img.logo {
+    width: 80px;
+    height: 80px;
+    position: relative;    
+    left: 80px;
+    top: -30px;
+}
+
+a.kk1 {
+    color: white;
+    text-decoration: none;
+}
+
+    a.kk:hover, a.kk1:hover {
+        color: #FCB326;
+        text-decoration: none;
+    }
+
+input[type="text"] {
+    font-size:20px;
+}
+
+input#search {
+    outline: none;
+    border: none;
+    font-family: 'Cabin Sketch', sans-serif;
+    font-size: 15px;
+    padding-left: 10px;       
+    text-transform: uppercase;
+    background-color: black;
+    color: #FCB326;
+    font-weight: 600;   
+}
+
+::placeholder {
+    color: #FCB326;    
+}
+
+span.color {
+    color: #FCB326;
+    font-weight: bold;   
+}
+
+span.color:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+li.look {
+    position: absolute;
+    left: 960px;
+    top: 35px;    
+    background-color: black;
+}
+
+.kk1 {
+    cursor: pointer;
+    position: relative;
+    left: 600px;
+    margin-top: 15px;
+    padding-bottom: 20px;
+    padding-right: 20px;
+    font-weight: 600;
+    letter-spacing: .085em;
+    font-size: 20px;
+    font-family: 'Cabin Sketch', sans-serif;
+    text-decoration: none;
+}
+
+div.new  {
+    background-image:url(old_letters_and_old_photos_kept_pen_ink_bottle-wallpaper-1600x900.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 500px;
+}
+
+div.books {
+    display: flex;
+}
+
+
+/* Pagination */
+
+
+.pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+}
+
+.pagination a.active {
+    background-color: ;
+    color: #FCB326;
+}
+
+.pagination a:hover:not(.active) {
+    background-color: beige;
+    color:  #FCB326;
+    border-radius: 50px;
+}
+
+div.pagination {
+    text-align: center;
+    margin: auto;
+    margin-top: 50px;
+    margin-left: 800px;
+    height: 50px;
+    margin-bottom: 80px;
+}
+
+
+/* Footer */
+
+
+
+footer.foot {    
+    height: 140px;
+    background-color: black;
+    display: flex;
+}
+
+div.down h1 {
+    text-transform: uppercase;
+    margin-top: 30px;
+    margin-left: 200px;
+    color:  #FCB326;
+}
+
+div.link {    
+    margin-left: 350px;   
+    padding-top: 10px;
+}
+
+div.link a {
+    text-decoration: none;
+    color: white;
+}
+
+div.link a:hover {
+    color: #FCB326;
+}
+
+p#copy {
+    margin-left: 350px;
+    margin-top: 60px;
+    color: white;
+}
+
+.fa-book {
+    padding-right: 10px;
+}

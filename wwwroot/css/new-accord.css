@@ -1,0 +1,87 @@
+div.one, div.two, div.three, div.four, div.five {
+  width: 25%;
+  min-width: 380px;
+  margin: 0 auto;
+  border-bottom: 1px solid #D1D0CE;    
+  border-right: 1px solid #D1D0CE;   
+  float: left;
+}
+
+div.one {
+ border-top: 1px solid #D1D0CE;    
+}
+
+div.two input,div.three input,div.four input,div.five input {
+  display: none;
+}
+
+input ~ div {
+  height: 1px;
+  overflow: hidden;
+}
+
+input ~ div > * {
+  opacity: 0;
+  transition: 0.5s;
+  font-size: 12px;
+  line-height: 1.75em;  
+}
+
+input + label {
+  display: block;
+  position: relative;
+  padding: 30px 45px;
+  font-weight: 500;
+  font-size: 15px;
+}
+
+input + label:after,
+input + label:before {
+  position: absolute;
+  background: black;
+  content: '';
+  transform: rotate(0deg);
+  transition: 0.5s;
+  top: 50%;
+  margin-right: 30px;
+ 
+}
+
+input + label:after {
+  right: 4px;
+  height: 10px;
+  width: 2px;
+  margin-top: -5px;
+}
+
+input + label:before {
+  right: 0;
+  width: 10px;
+  height: 2px;
+  margin-top: -1px;
+}
+
+input:checked ~ div {
+  height: auto;
+  margin:  2px 0 10px;
+}
+
+input:checked ~ div > * {
+  opacity: 1;
+  transition: 0.5s;
+  transition-delay: 0.25s;
+}
+
+input:checked + label:before {
+  transform: rotate(360deg);
+  transition: 0.5s;
+}
+
+input:checked + label:after {
+  transform: rotate(450deg);
+  transition: 0.5s;
+}
+
+label:hover {
+  cursor: pointer;
+}

@@ -42,6 +42,54 @@ namespace Bookstore.Controllers
             return View();
         }
 
+        //public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? page)
+        //{
+        //    ViewBag.CurrentSort = sortOrder;
+        //    ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+        //    ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
+
+        //    // Search
+
+        //    if (searchString != null)
+        //    {
+        //        page = 1;
+        //    }
+        //    else
+        //    {
+        //        searchString = currentFilter;
+        //    }
+
+        //    ViewBag.CurrentFilter = searchString;
+
+        //    var books = from s in _context.Book
+        //                select s;
+        //    if (!String.IsNullOrEmpty(searchString))
+        //    {
+        //        books = books.Where(s => s.Title.Contains(searchString)
+        //                               || s.Author.Contains(searchString));
+        //    }            
+        //    switch (sortOrder)
+        //    {
+        //        case "name_desc":
+        //            books = books.OrderByDescending(s => s.Title);
+        //            break;
+        //        case "Date":
+        //            books = books.OrderBy(s => s.Price);
+        //            break;
+        //        case "date_desc":
+        //            books = books.OrderByDescending(s => s.Price);
+        //            break;
+        //        default:  // Name ascending 
+        //            books = books.OrderBy(s => s.Title);
+        //            break;
+        //    }
+
+        //    //int pageSize = 10;
+        //    //int pageNumber = (page ?? 1);
+        //    //return View(books.ToPagedList(pageNumber, pageSize));
+        //    return View();
+        //}
+
         public IActionResult Privacy()
         {
             return View();
