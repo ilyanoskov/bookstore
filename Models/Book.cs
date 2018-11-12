@@ -5,8 +5,6 @@ using System.Web;
 
 namespace Bookstore.Models
 {
-
-
     public class Book
     {
         public int id { get; set;}

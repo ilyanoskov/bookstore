@@ -35,6 +35,26 @@
         margin-left: 20px;
         margin-right: 10px;
     }
+
+        input.btn2
+        {
+        width: 100px;
+        height: 30px;
+        border-radius: 30px;
+        color: #FCB326;
+        border: 1px solid #ECE49B;
+        background-color: #000;
+        font-size: 20px;
+        font-family: 'Cabin Sketch', sans-serif;
+        margin-left: 30px;
+    }
+
+    input.btn2:hover {
+        cursor: pointer;
+        background-color: #FCB326;
+        border: #FCB326;
+        color: #fff;
+    }
 </style>
 
 <h3 style="text-align:center; margin-top:50px; margin-bottom:50px;"><i class="fa fa-book" aria-hidden="true"></i>Book Details</h3>
@@ -105,8 +125,26 @@
     </dl>
 </div>
 
-<div>
-    <i class="fa fa-pencil" aria-hidden="true" id="dir"></i><a asp-action="Edit" asp-route-id="@Model.id" class="direct">Edit</a> &nbsp; |   &nbsp;
+
+@*<div>
+    <i class="fa fa-pencil" aria-hidden="true" id="dir"></i><a asp-action="Edit" asp-route-id="@Model.id" class="direct">Edit</a> &nbsp;  |   &nbsp;
     <i class="fa fa-arrow-left" aria-hidden="true" style="margin-right:10px;"></i> @Html.ActionLink("Back to List", "Index", "Books", "", new { @class = "direct" })
 
-</div>
+</div>*@
+
+@if (ViewContext.HttpContext.User.IsInRole("Manager"))
+{
+    <div>
+        <i class="fa fa-pencil" aria-hidden="true" id="dir"></i><a asp-action="Edit" asp-route-id="@Model.id" class="direct">Edit</a> &nbsp;  |   &nbsp;
+        <i class="fa fa-arrow-left" aria-hidden="true" style="margin-right:10px;"></i> @Html.ActionLink("Back to List", "Index", "Books", "", new { @class = "direct" })
+
+    </div>
+}
+else
+{
+    <div>
+        <input type="submit" value="Purchase" class="btn2" /> &nbsp; |   &nbsp;
+        <i class="fa fa-arrow-left" aria-hidden="true" style="margin-right:10px;"></i> @Html.ActionLink("Back to List", "Index", "Home", "", new { @class = "direct" })
+    </div>
+}
+     
