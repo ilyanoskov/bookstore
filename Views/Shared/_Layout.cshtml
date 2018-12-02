@@ -26,31 +26,46 @@
 </head>
 <body>
     <nav id="navbar">
-        <li><a href="@Url.Action("Index", "Home")"><img class="logo" src="~/css/logo_square.png" alt="Logo"></a></li>
-        <li><a href="@Url.Action("Index", "Home")" class="k1">Goldfinch</a></li>
-        <li><a href="@Url.Action("Index", "Home")" class="kk">Books</a></li>
-        <li><a href="@Url.Action("About", "Home")" class="kk">About Us</a></li>
-        <li><a href="@Url.Action("Index", "Manager")" class="kk">Manager</a></li>
+        
 
-        <li class="look">
-            <div class="box">
-                <div class="container-1" style="display:flex;">
-                    <span class="icon" style="margin-right:20px;"><i class="fa fa-search"></i></span>
-                    @using (Html.BeginForm("Index", "Home", FormMethod.Get))
-                    {
-                        @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, null,
-                       new { style = "font-family:'Cabin Sketch', sans-serif; background-color:black; outline: none; border: none;font - size: 15px; padding - left: 10px; color: #FCB326; font - weight: 600; height:15px;", @placeholder = "SEARCH" })
-                        <input type="submit" id="search" style="color:black;" />
-                    }
+            <li><a href="@Url.Action("Index", "Home")"><img class="logo" src="~/css/logo_square.png" alt="Logo"></a></li>
+            <li><a href="@Url.Action("Index", "Home")" class="k1">Goldfinch</a></li>
+            <li><a href="@Url.Action("Index", "Home")" class="kk">Books</a></li>
+            <li><a href="@Url.Action("About", "Home")" class="kk">About Us</a></li>
+            <li><a href="@Url.Action("Index", "Manager")" class="kk">Manager</a></li>
+
+            <li class="look">
+                <div class="bo">
+                    <div class="container-1" style="display:flex;">
+                        <span class="icon" style="margin-right:10px;"><i class="fa fa-search"></i></span>
+                        @using (Html.BeginForm("Index", "Home", FormMethod.Get))
+                {
+                    @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, null,
+                   new { style = "font-family:'Cabin Sketch', sans-serif; background-color:black; outline: none; border: none;font-size: 15px; color: #FCB326; font-weight: 600; height:15px; line-height: 13px;", @placeholder = "SEARCH" })
+                    <input type="submit" id="search" style="color:black; width: 3px; margin: 0;" />
+        }
+                    </div>
                 </div>
-            </div>
-        </li>
+            </li>
+
+
+
+
+            <div style="display: flex; margin-left: 8em; ">
+
+                @*
         <partial name="_LoginPartial" />
-        @*<li><a href="@Url.Action("LoginPartial", "Shared")" class="kk1"><i class="fa fa-user" aria-hidden="true"></i></a></li>
-            <li><a href="@Url.Action("Basket", "Home")" class="kk1"><i class="fa fa-shopping-basket" aria-hidden="true"></i></a></li>*@
+
+                *@)
+
+
+                <li><a href="/Identity/Account/Login" class="kk"><i class="fa fa-user" aria-hidden="true"></i></a></li>
+                <li><a href="@Url.Action("Basket", "Home")" class="kk"><i class="fa fa-shopping-basket" aria-hidden="true"></i></a></li>
+            </div>
+
+
     </nav>
 
-    <partial name="_CookieConsentPartial" />
 
     @RenderBody()
     <hr />
