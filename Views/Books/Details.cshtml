@@ -128,16 +128,16 @@
 
 @if (ViewContext.HttpContext.User.IsInRole("Manager"))
 {
-    <div>
-        <i class="fa fa-pencil" aria-hidden="true" id="dir"></i><a asp-action="Edit" asp-route-id="@Model.id" class="direct">Edit</a> &nbsp;  |   &nbsp;
-        <i class="fa fa-arrow-left" aria-hidden="true" style="margin-right:10px;"></i> @Html.ActionLink("Back to List", "Index", "Books", "", new { @class = "direct" })
-
-    </div>
+<div>
+    <i class="fa fa-pencil" aria-hidden="true" id="dir"></i><a asp-action="Edit" asp-route-id="@Model.id" class="direct">Edit</a> &nbsp;  |   &nbsp;
+    <i class="fa fa-arrow-left" aria-hidden="true" style="margin-right:10px;"></i> @Html.ActionLink("Back to List", "Index", "Books", "", new { @class = "direct" })
+    <a asp-action="AddToBasket" asp-route-id="@Model.id" class="direct">Add To Basket</a>
+</div>
 }
 else
 {
     <div>
-        <input type="submit" value="Purchase" class="btn2" /> &nbsp; |   &nbsp;
+        <a asp-action="AddToBasket" asp-route-id="@Model.id" class="direct">Add To Basket</a> &nbsp; |   &nbsp;
         <i class="fa fa-arrow-left" aria-hidden="true" style="margin-right:10px;"></i> @Html.ActionLink("Back to List", "Index", "Home", "", new { @class = "direct" })
     </div>
 }
