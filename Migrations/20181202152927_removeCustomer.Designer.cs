@@ -7,85 +7,26 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace Bookstore.Data.Migrations
+namespace Bookstore1.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20181018002451_Customer_dbo")]
-    partial class Customer_dbo
+    [Migration("20181202152927_removeCustomer")]
+    partial class removeCustomer
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.1-rtm-30846")
+                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Bookstore.Models.Book", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Author");
-
-                    b.Property<string>("Category");
-
-                    b.Property<int>("Pages");
-
-                    b.Property<double>("Price");
-
-                    b.Property<string>("Publisher");
-
-                    b.Property<int>("Pulication_year");
-
-                    b.Property<string>("Resume");
-
-                    b.Property<int>("Stock");
-
-                    b.Property<string>("Title");
-
-                    b.Property<string>("Type");
-
-                    b.HasKey("id");
-
-                    b.ToTable("Book");
-                });
-
-            modelBuilder.Entity("Bookstore.Models.Category", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("genre");
-
-                    b.HasKey("id");
-
-                    b.ToTable("Category");
-                });
-
-            modelBuilder.Entity("Bookstore.Models.Manager", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("name");
-
-                    b.HasKey("id");
-
-                    b.ToTable("Manager");
-                });
-
-            modelBuilder.Entity("Bookstore.Models.Customer", b =>
+            modelBuilder.Entity("Bookstore.Data.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("AccessFailedCount");
-
-                    b.Property<string>("Address");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
@@ -95,13 +36,11 @@ namespace Bookstore.Data.Migrations
 
                     b.Property<bool>("EmailConfirmed");
 
-                    b.Property<string>("FirstName");
-
-                    b.Property<string>("LastName");
-
                     b.Property<bool>("LockoutEnabled");
 
                     b.Property<DateTimeOffset?>("LockoutEnd");
+
+                    b.Property<string>("Name");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256);
@@ -133,6 +72,65 @@ namespace Bookstore.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+                });
+
+            modelBuilder.Entity("Bookstore.Models.Book", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Author");
+
+                    b.Property<int>("CategoryId");
+
+                    b.Property<string>("CoverType");
+
+                    b.Property<int>("Pages");
+
+                    b.Property<double>("Price");
+
+                    b.Property<int>("PublicationYear");
+
+                    b.Property<string>("Publisher");
+
+                    b.Property<string>("Resume");
+
+                    b.Property<int>("Stock");
+
+                    b.Property<string>("Title");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.ToTable("Book");
+                });
+
+            modelBuilder.Entity("Bookstore.Models.Category", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("genre");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Category");
+                });
+
+            modelBuilder.Entity("Bookstore.Models.Manager", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("name");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Manager");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -245,6 +243,14 @@ namespace Bookstore.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("Bookstore.Models.Book", b =>
+                {
+                    b.HasOne("Bookstore.Models.Category", "Category")
+                        .WithMany("Books")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")
@@ -255,7 +261,7 @@ namespace Bookstore.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Bookstore.Models.Customer")
+                    b.HasOne("Bookstore.Data.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -263,7 +269,7 @@ namespace Bookstore.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Bookstore.Models.Customer")
+                    b.HasOne("Bookstore.Data.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -276,7 +282,7 @@ namespace Bookstore.Data.Migrations
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Bookstore.Models.Customer")
+                    b.HasOne("Bookstore.Data.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -284,7 +290,7 @@ namespace Bookstore.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Bookstore.Models.Customer")
+                    b.HasOne("Bookstore.Data.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);

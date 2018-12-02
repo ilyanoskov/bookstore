@@ -19,5 +19,6 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\NewFolder\" />
+    <Folder Include="Data\Migrations\" />
   </ItemGroup>
 </Project>

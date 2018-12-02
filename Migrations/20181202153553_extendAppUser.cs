@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Bookstore.Data.Migrations
+namespace Bookstore1.Migrations
 {
-    public partial class Customer_model : Migration
+    public partial class extendAppUser : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
