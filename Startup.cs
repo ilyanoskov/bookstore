@@ -36,8 +36,8 @@ namespace Bookstore
 
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
-                    Configuration.GetConnectionString("KateConnection")));
-            services.AddIdentity<IdentityUser, IdentityRole>()
+                    Configuration.GetConnectionString("DefaultConnection")));
+            services.AddIdentity<ApplicationUser, IdentityRole>()
                .AddEntityFrameworkStores<ApplicationDbContext>()
                //Call bellow adds UI for any user (including anonymous)
                .AddDefaultUI();
@@ -79,7 +79,7 @@ namespace Bookstore
         {
             //initializing custom roles 
             var RoleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-            var UserManager = serviceProvider.GetRequiredService<UserManager<IdentityUser>>();
+            var UserManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
             string[] roleNames = { "Admin", "Manager", "Member" };
             IdentityResult roleResult;
 
@@ -94,7 +94,7 @@ namespace Bookstore
             }
 
             //Here you could create a super user who will maintain the web app
-            var poweruser = new IdentityUser
+            var poweruser = new ApplicationUser
             {
 
                 UserName = Configuration["UserSettings:UserEmail"],
