@@ -36,7 +36,7 @@ namespace Bookstore
 
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
-                    Configuration.GetConnectionString("KateConnection")));
+                    Configuration.GetConnectionString("StefanConnection")));
             services.AddIdentity<ApplicationUser, IdentityRole>()
                .AddEntityFrameworkStores<ApplicationDbContext>()
                //Call bellow adds UI for any user (including anonymous)

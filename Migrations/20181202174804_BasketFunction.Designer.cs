@@ -4,18 +4,20 @@ using Bookstore.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace Bookstore.Data.Migrations
+namespace Bookstore1.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20181202174804_BasketFunction")]
+    partial class BasketFunction
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
+                .HasAnnotation("ProductVersion", "2.1.1-rtm-30846")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -26,6 +28,8 @@ namespace Bookstore.Data.Migrations
 
                     b.Property<int>("AccessFailedCount");
 
+                    b.Property<string>("Address");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
@@ -33,6 +37,10 @@ namespace Bookstore.Data.Migrations
                         .HasMaxLength(256);
 
                     b.Property<bool>("EmailConfirmed");
+
+                    b.Property<string>("FirstName");
+
+                    b.Property<string>("LastName");
 
                     b.Property<bool>("LockoutEnabled");
 
@@ -78,6 +86,8 @@ namespace Bookstore.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("ApplicationUserId");
+
                     b.Property<string>("Author");
 
                     b.Property<int>("CategoryId");
@@ -99,6 +109,8 @@ namespace Bookstore.Data.Migrations
                     b.Property<string>("Title");
 
                     b.HasKey("id");
+
+                    b.HasIndex("ApplicationUserId");
 
                     b.HasIndex("CategoryId");
 
@@ -243,6 +255,10 @@ namespace Bookstore.Data.Migrations
 
             modelBuilder.Entity("Bookstore.Models.Book", b =>
                 {
+                    b.HasOne("Bookstore.Data.ApplicationUser")
+                        .WithMany("Basket")
+                        .HasForeignKey("ApplicationUserId");
+
                     b.HasOne("Bookstore.Models.Category", "Category")
                         .WithMany("Books")
                         .HasForeignKey("CategoryId")

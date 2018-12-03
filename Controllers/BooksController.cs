@@ -9,6 +9,7 @@ using Bookstore.Data;
 using Bookstore.Models;
 using Microsoft.AspNetCore.Authorization;
 using System.Diagnostics;
+using Microsoft.AspNetCore.Identity;
 
 
 namespace Bookstore.Controllers
@@ -16,10 +17,12 @@ namespace Bookstore.Controllers
     public class BooksController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public BooksController(ApplicationDbContext context)
+        public BooksController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Books
@@ -169,6 +172,25 @@ namespace Bookstore.Controllers
         private bool BookExists(int id)
         {
             return _context.Book.Any(e => e.id == id);
+        }
+
+        public async Task<IActionResult> AddToBasket(int? id)
+        {
+
+            var book = await _context.Book.FindAsync(id);
+            ApplicationUser user = await _userManager.GetUserAsync(HttpContext.User);
+            var Basket_ = new List<Book>();
+            
+            Basket_.Add(book);
+            user.Basket = Basket_;
+            //ApplicationUser _user = user;
+            //_user.Basket = Basket_;
+            //user.Basket = _user.Basket;
+            //_context.Entry(user).CurrentValues.SetValues(_user);
+            _context.Users.Update(user);
+            _context.SaveChanges();
+            var books = user.Basket.ToList();
+            return View("~/Views/Home/Basket.cshtml", books);
         }
     }
 }
