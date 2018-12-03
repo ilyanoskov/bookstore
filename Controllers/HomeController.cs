@@ -59,6 +59,20 @@ namespace Bookstore.Controllers
             return View("Index", model);
         }
 
+        public IActionResult Basket()
+        {
+            ViewData["Message"] = "Your Basket page";
+            return View();
+        }
+
+        public IActionResult Purchase()
+        {
+            ViewData["Message"] = "Your Purchase page";
+            return View();
+        }
+
+
+
 
         public IActionResult About()
         {
