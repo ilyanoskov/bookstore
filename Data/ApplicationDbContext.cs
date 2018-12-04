@@ -16,14 +16,33 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     public DbSet<Bookstore.Models.Book> Book { get; set; }
     public DbSet<Bookstore.Models.Category> Category { get; set; }
     public DbSet<Bookstore.Models.Manager> Manager { get; set; }
+    
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-           // modelBuilder.Entity<ApplicationUser>()
-           //.HasMany(b => b.Basket)
-           //.WithOne();
+            //modelBuilder.Entity<ApplicationUser>(
+            //  typeBuilder =>
+            //  {
+            //      typeBuilder.HasMany(host => host.Basket)
+            //          .WithOne(guest => guest.ApplicationUser)
+            //          .HasForeignKey(guest => guest.ApplicationUserId)
+            //          .IsRequired();
+
+                
+            //});
+
+            //modelBuilder.Entity<Book>(
+            //    typeBuilder =>
+            //    {
+            //        typeBuilder.HasOne(guest => guest.ApplicationUser)
+            //            .WithMany(host => host.Basket)
+            //            .HasForeignKey(guest => guest.ApplicationUserId)
+            //            .IsRequired();
+
+                
+            //});
         }
     }
 

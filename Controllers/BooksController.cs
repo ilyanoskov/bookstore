@@ -10,7 +10,8 @@ using Bookstore.Models;
 using Microsoft.AspNetCore.Authorization;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Identity;
-
+using System.Security.Claims;
+using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace Bookstore.Controllers
 {
@@ -174,23 +175,42 @@ namespace Bookstore.Controllers
             return _context.Book.Any(e => e.id == id);
         }
 
-        public async Task<IActionResult> AddToBasket(int? id)
+        
+        public async Task<IActionResult> AddToBasket(int id)
         {
 
             var book = await _context.Book.FindAsync(id);
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var user2 = this.User.FindFirstValue(ClaimTypes.UserData);
+            book.ApplicationUserId = userId;
+
             ApplicationUser user = await _userManager.GetUserAsync(HttpContext.User);
-            var Basket_ = new List<Book>();
-            
-            Basket_.Add(book);
-            user.Basket = Basket_;
-            //ApplicationUser _user = user;
-            //_user.Basket = Basket_;
-            //user.Basket = _user.Basket;
-            //_context.Entry(user).CurrentValues.SetValues(_user);
-            _context.Users.Update(user);
-            _context.SaveChanges();
-            var books = user.Basket.ToList();
-            return View("~/Views/Home/Basket.cshtml", books);
+            user.Basket = new List<Book>();
+
+            _context.Users.Find(userId).Basket.Add(book);
+            _context.Update(user);
+            await _context.SaveChangesAsync();
+
+            //Book book = await _context.Book.FindAsync(id);
+            //ApplicationUser user = await _userManager.GetUserAsync(HttpContext.User);
+            //var Basket_ = new List<Book>();
+            //Basket_.Add(book);
+            //user.Basket = Basket_;
+            //_context.Users.Update(user);
+            //_context.SaveChanges();
+            //var books = user.Basket;
+            return View("~/Views/Home/Basket.cshtml", user.Basket);
+        }
+
+        public async Task<IActionResult> RemoveFromBasket(Book book)
+        {
+            ApplicationUser user = await _userManager.GetUserAsync(HttpContext.User);
+            var books = user.Basket;
+            if (user.Basket.Remove(book))
+            {
+                return View("~/Views/Home/Basket.cshtml", user.Basket);
+            }
+            return RedirectToAction(nameof(Index));
         }
     }
 }

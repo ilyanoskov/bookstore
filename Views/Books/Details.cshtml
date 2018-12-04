@@ -134,11 +134,18 @@
     <a asp-action="AddToBasket" asp-route-id="@Model.id" class="direct">Add To Basket</a>
 </div>
 }
+else if (ViewContext.HttpContext.User.IsInRole("Member"))
+{
+<div>
+    
+        <a asp-action="AddToBasket" asp-route-id="@Model.id" class="direct">Add To Basket</a> &nbsp; |   &nbsp;
+        <i class="fa fa-arrow-left" aria-hidden="true" style="margin-right:10px;"></i> @Html.ActionLink("Back to List", "Index", "Home", "", new { @class = "direct" })
+</div>
+}
 else
 {
     <div>
-        <a asp-action="AddToBasket" asp-route-id="@Model.id" class="direct">Add To Basket</a> &nbsp; |   &nbsp;
+        <a href="/Identity/Account/Login" class="direct">Add To Basket</a> &nbsp; |   &nbsp;
         <i class="fa fa-arrow-left" aria-hidden="true" style="margin-right:10px;"></i> @Html.ActionLink("Back to List", "Index", "Home", "", new { @class = "direct" })
     </div>
 }
-     
