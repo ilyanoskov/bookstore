@@ -99,7 +99,7 @@
 
                 </td>
                 <td>
-                    <a asp-action="RemoveFromBasket" asp-route-id="@item.id">Remove</a> |
+                    <a asp-controller="Books" asp-action="RemoveFromBasket" asp-route-id="@item.id">Remove</a> |
                     @*<a href="@Url.Action("RemoveFromBasket", "BooksController", item)" class="kk"> Remove </a>*@
                         @*<a asp-action="Details" asp-route-id="@item.id">Details</a> |
             <a asp-action="Delete" asp-route-id="@item.id">Delete</a>*@
