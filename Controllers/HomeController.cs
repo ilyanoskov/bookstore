@@ -9,6 +9,7 @@ using Bookstore.Data;
 using System.Diagnostics;
 using Bookstore.Models;
 using PagedList.Core;
+using System.Security.Claims;
 
 namespace Bookstore.Controllers
 {
@@ -58,6 +59,29 @@ namespace Bookstore.Controllers
 
             return View("Index", model);
         }
+
+
+        public async Task<IActionResult> Basket()
+        {
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var basket = _context.Book.Where(b => b.ApplicationUserId == userId).ToList();
+            return View("~/Views/Home/Basket.cshtml", basket);
+        }
+
+        public async Task<IActionResult> Purchase()
+        {
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var basket = _context.Book.Where(b => b.ApplicationUserId == userId).ToList();
+
+            double sum = 0;
+            basket.ForEach((Book obj) => sum += obj.Price);
+
+            ViewData["sum"] = sum;
+
+            return View();
+        }
+
+
 
 
         public IActionResult About()

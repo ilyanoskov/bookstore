@@ -190,19 +190,23 @@ namespace Bookstore.Controllers
             //_context.Update(user);
             await _context.SaveChangesAsync();
 
-            
-            return View("~/Views/Home/Basket.cshtml", basket);
+
+            return RedirectToAction( "Basket", "Home");
         }
 
-        public async Task<IActionResult> RemoveFromBasket(Book book)
+
+        public async Task<IActionResult> RemoveFromBasket(int id)
         {
-            ApplicationUser user = await _userManager.GetUserAsync(HttpContext.User);
-            var books = user.Basket;
-            if (user.Basket.Remove(book))
-            {
-                return View("~/Views/Home/Basket.cshtml", user.Basket);
-            }
-            return RedirectToAction(nameof(Index));
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var book = await _context.Book.FindAsync(id);
+            book.ApplicationUserId = null;
+            _context.Update(book);
+            await _context.SaveChangesAsync();
+
+            var basket = _context.Book.Where(b => b.ApplicationUserId == userId).ToList();
+
+            return View("~/Views/Home/Basket.cshtml", basket);
+
         }
     }
 }
