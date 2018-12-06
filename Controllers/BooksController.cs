@@ -188,6 +188,7 @@ namespace Bookstore.Controllers
             //user.Basket.Add(book);
             //_context.Users.Find(user.Id).Basket.Add(book);
             //_context.Update(user);
+            _context.Update(book);
             await _context.SaveChangesAsync();
 
 
