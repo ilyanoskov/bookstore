@@ -181,25 +181,17 @@ namespace Bookstore.Controllers
 
             var book = await _context.Book.FindAsync(id);
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var user2 = this.User.FindFirstValue(ClaimTypes.UserData);
+            //ApplicationUser user = await _userManager.FindByEmailAsync(User.Identity.Name);
             book.ApplicationUserId = userId;
 
-            ApplicationUser user = await _userManager.GetUserAsync(HttpContext.User);
-            user.Basket = new List<Book>();
-
-            _context.Users.Find(userId).Basket.Add(book);
-            _context.Update(user);
+            var basket = _context.Book.Where(b => b.ApplicationUserId == userId).ToList();
+            //user.Basket.Add(book);
+            //_context.Users.Find(user.Id).Basket.Add(book);
+            //_context.Update(user);
             await _context.SaveChangesAsync();
 
-            //Book book = await _context.Book.FindAsync(id);
-            //ApplicationUser user = await _userManager.GetUserAsync(HttpContext.User);
-            //var Basket_ = new List<Book>();
-            //Basket_.Add(book);
-            //user.Basket = Basket_;
-            //_context.Users.Update(user);
-            //_context.SaveChanges();
-            //var books = user.Basket;
-            return View("~/Views/Home/Basket.cshtml", user.Basket);
+            
+            return View("~/Views/Home/Basket.cshtml", basket);
         }
 
         public async Task<IActionResult> RemoveFromBasket(Book book)
