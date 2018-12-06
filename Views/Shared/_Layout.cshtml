@@ -60,14 +60,22 @@
 
         <div style="display: flex; margin-left: 20em; ">
 
-            
+
             @*<partial name="_LoginPartial" />*@
 
-            
+
 
 
             <li><a href="/Identity/Account/Login" class="kk"><i class="fa fa-user" aria-hidden="true"></i></a></li>
-            <li><a href="@Url.Action("Basket", "Home")" class="kk"><i class="fa fa-shopping-basket" aria-hidden="true"></i></a></li>
+            @if(ViewContext.HttpContext.User.IsInRole("Manager") || ViewContext.HttpContext.User.IsInRole("Member"))
+            {
+                <li><a href="@Url.Action("DisplayBasket", "Home")" class="kk"><i class="fa fa-shopping-basket" aria-hidden="true"></i></a></li>
+            }
+            else
+            {
+                <li><a href="/Identity/Account/Login" class="kk"><i class="fa fa-shopping-basket" aria-hidden="true"></i></a></li>
+            }
+            
         </div>
 
 

@@ -99,10 +99,11 @@
 
                 </td>
                 <td>
-                    <a asp-action="RemoveFromBasket" asp-route-id="@item.id">Remove</a> |
-                    @*<a href="@Url.Action("RemoveFromBasket", "BooksController", item)" class="kk"> Remove </a>*@
-                        @*<a asp-action="Details" asp-route-id="@item.id">Details</a> |
-            <a asp-action="Delete" asp-route-id="@item.id">Delete</a>*@
+                    <a asp-controller="Books" asp-action="RemoveFromBasket" asp-route-id="@item.id" class="direct">Remove</a> |
+                    @*<a href="@Url.Action("RemoveFromBasket", "Book", item.id)" class="direct"> Remove </a>*@
+                    @*@Html.ActionLink("Remove", "RemoveFromBasket", "Books", item.id, new { @class = "direct" })*@
+                    @*<a asp-action="Details" asp-route-id="@item.id">Details</a> |
+        <a asp-action="Delete" asp-route-id="@item.id">Delete</a>*@
                 </td>
             </tr>
         }

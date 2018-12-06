@@ -174,34 +174,34 @@ namespace Bookstore.Controllers
         {
             return _context.Book.Any(e => e.id == id);
         }
-
         
         public async Task<IActionResult> AddToBasket(int id)
         {
 
             var book = await _context.Book.FindAsync(id);
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            //ApplicationUser user = await _userManager.FindByEmailAsync(User.Identity.Name);
             book.ApplicationUserId = userId;
 
             var basket = _context.Book.Where(b => b.ApplicationUserId == userId).ToList();
-            //user.Basket.Add(book);
-            //_context.Users.Find(user.Id).Basket.Add(book);
-            //_context.Update(user);
+            _context.Update(book);
             await _context.SaveChangesAsync();
 
-            
             return View("~/Views/Home/Basket.cshtml", basket);
         }
 
-        public async Task<IActionResult> RemoveFromBasket(Book book)
+        public async Task<IActionResult> RemoveFromBasket(int id)
         {
-            ApplicationUser user = await _userManager.GetUserAsync(HttpContext.User);
-            var books = user.Basket;
-            if (user.Basket.Remove(book))
+            var book = await _context.Book.FindAsync(id);
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            book.ApplicationUserId = null;
+            _context.Update(book);
+            await _context.SaveChangesAsync();
+            if (book.ApplicationUserId == null)
             {
-                return View("~/Views/Home/Basket.cshtml", user.Basket);
+                var basket = _context.Book.Where(b => b.ApplicationUserId == userId).ToList();
+                return View("~/Views/Home/Basket.cshtml", basket);
             }
+            
             return RedirectToAction(nameof(Index));
         }
     }

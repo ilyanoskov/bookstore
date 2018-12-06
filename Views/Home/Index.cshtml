@@ -157,10 +157,11 @@
 
         @foreach (var item in Model)
         {
+            var count = 200;
             <div class="hold-book">
                 <a class="book" href="/books/details/@item.id">
                     <br />
-                    <img src="~/images/jamie-italy.jpg" />
+                    <img src="https://picsum.photos/200/300/" />
                     <p>
                         @Html.DisplayFor(modelItem => item.Title)
                     </p>

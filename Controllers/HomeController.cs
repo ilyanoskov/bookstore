@@ -9,6 +9,7 @@ using Bookstore.Data;
 using System.Diagnostics;
 using Bookstore.Models;
 using PagedList.Core;
+using System.Security.Claims;
 
 namespace Bookstore.Controllers
 {
@@ -72,6 +73,13 @@ namespace Bookstore.Controllers
             ViewData["Message"] = "Your contact page.";
 
             return View();
+        }
+
+        public IActionResult DisplayBasket()
+        {
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var basket = _context.Book.Where(b => b.ApplicationUserId == userId).ToList();
+            return View("Basket", basket);
         }
 
         //public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? page)
