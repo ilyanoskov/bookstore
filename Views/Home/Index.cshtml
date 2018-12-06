@@ -145,35 +145,37 @@
     <!-- Books -->
 
     <div class="holder2">
-
         @if (Model.Count() == 0)
-        {
-            <div>
-
-                <h1>The category does not exist!</h1>
-            </div>
-        }
-
+    {
+        <div>
+            <h1>The category does not exist!</h1>
+        </div>
+}
 
         @foreach (var item in Model)
         {
-            <div class="hold-book">
-                <a class="book" href="/books/details/@item.id">
-                    <br />
-                    <img src="~/images/jamie-italy.jpg" />
-                    <p>
-                        @Html.DisplayFor(modelItem => item.Title)
-                    </p>
-                    <h4>
-                        @Html.DisplayFor(modelItem => item.Author)
-                    </h4>
-                    <h3>
-                        &pound;
-                        @Html.DisplayFor(modelItem => item.Price)
-                    </h3>
-                </a>
-            </div>
-        }
+
+            Random randm = new Random();
+            int random = randm.Next(300, 350);
+            string n = random.ToString();
+            string link = "https://picsum.photos/200/" + n + "/?random";
+    <div class="hold-book">
+        <a class="book" href="/books/details/@item.id">
+            <br />
+            <img src="@link" />
+            <p>
+                @Html.DisplayFor(modelItem => item.Title)
+            </p>
+            <h4>
+                @Html.DisplayFor(modelItem => item.Author)
+            </h4>
+            <h3>
+                &pound;
+                @Html.DisplayFor(modelItem => item.Price)
+            </h3>
+        </a>
+    </div>
+}
     </div>
 </div><!-- One Giant Div -->
 
