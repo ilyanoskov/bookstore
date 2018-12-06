@@ -23,41 +23,44 @@
 <h2>Basket</h2>
 
 <table class="flat-table">
-    @*<thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Title)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Price)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Author)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.PublicationYear)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Publisher)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Pages)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Resume)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.CoverType)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Category)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Stock)
-                </th>
-                <th></th>
-            </tr>
-        </thead>*@
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            @*<th>
+            @Html.DisplayNameFor(model => model.Author)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PublicationYear)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Publisher)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Pages)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Resume)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CoverType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Category)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Stock)
+        </th>*@
+            <th>
+                <a>Amount</a>
+            </th>
+            <th></th>
+        </tr>
+        </thead>
     <tbody>
         @foreach (var item in Model)
         {
@@ -92,11 +95,15 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.Stock)
                     </td>*@
-                @*<td>
-                        <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.id">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.id">Delete</a>
-                    </td>*@
+                <td>
+
+                </td>
+                <td>
+                    <a asp-controller="Books" asp-action="RemoveFromBasket" asp-route-id="@item.id">Remove</a> |
+                    @*<a href="@Url.Action("RemoveFromBasket", "BooksController", item)" class="kk"> Remove </a>*@
+                        @*<a asp-action="Details" asp-route-id="@item.id">Details</a> |
+            <a asp-action="Delete" asp-route-id="@item.id">Delete</a>*@
+                </td>
             </tr>
         }
     </tbody>

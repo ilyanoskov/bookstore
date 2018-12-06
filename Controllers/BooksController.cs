@@ -10,7 +10,8 @@ using Bookstore.Models;
 using Microsoft.AspNetCore.Authorization;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Identity;
-
+using System.Security.Claims;
+using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace Bookstore.Controllers
 {
@@ -174,23 +175,39 @@ namespace Bookstore.Controllers
             return _context.Book.Any(e => e.id == id);
         }
 
-        public async Task<IActionResult> AddToBasket(int? id)
+        
+        public async Task<IActionResult> AddToBasket(int id)
         {
 
             var book = await _context.Book.FindAsync(id);
-            ApplicationUser user = await _userManager.GetUserAsync(HttpContext.User);
-            var Basket_ = new List<Book>();
-            
-            Basket_.Add(book);
-            user.Basket = Basket_;
-            //ApplicationUser _user = user;
-            //_user.Basket = Basket_;
-            //user.Basket = _user.Basket;
-            //_context.Entry(user).CurrentValues.SetValues(_user);
-            _context.Users.Update(user);
-            _context.SaveChanges();
-            var books = user.Basket.ToList();
-            return View("~/Views/Home/Basket.cshtml", books);
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            //ApplicationUser user = await _userManager.FindByEmailAsync(User.Identity.Name);
+            book.ApplicationUserId = userId;
+
+            var basket = _context.Book.Where(b => b.ApplicationUserId == userId).ToList();
+            //user.Basket.Add(book);
+            //_context.Users.Find(user.Id).Basket.Add(book);
+            //_context.Update(user);
+            _context.Update(book);
+            await _context.SaveChangesAsync();
+
+
+            return RedirectToAction( "Basket", "Home");
+        }
+
+
+        public async Task<IActionResult> RemoveFromBasket(int id)
+        {
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var book = await _context.Book.FindAsync(id);
+            book.ApplicationUserId = null;
+            _context.Update(book);
+            await _context.SaveChangesAsync();
+
+            var basket = _context.Book.Where(b => b.ApplicationUserId == userId).ToList();
+
+            return View("~/Views/Home/Basket.cshtml", basket);
+
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Bookstore.Data;
 
 namespace Bookstore.Models
 {
@@ -19,5 +20,7 @@ namespace Bookstore.Models
         public int Stock { get; set; }
         public int CategoryId { get; set; }
         public Category Category { get; set; }
+        public string ApplicationUserId { get; set; }
+        public virtual ApplicationUser ApplicationUser { get; set; }
     }
 }
