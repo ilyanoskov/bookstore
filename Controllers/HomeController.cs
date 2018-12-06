@@ -81,6 +81,21 @@ namespace Bookstore.Controllers
             return View();
         }
 
+        public async Task<IActionResult> MakePurchase()
+        {
+
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var basket = _context.Book.Where(b => b.ApplicationUserId == userId).ToList();
+            basket.ForEach((Book obj) =>
+            {
+                obj.ApplicationUserId = null;
+                _context.Update(obj);
+            });
+
+          
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
 
 
 
